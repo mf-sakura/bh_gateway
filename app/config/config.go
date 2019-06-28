@@ -5,7 +5,7 @@ import (
 )
 
 type GRPCConfig struct {
-	HotelPort int    `envconfig:"HOTEL_PORT" default:"5001"`
+	HotelPort string `envconfig:"HOTEL_PORT" default:"5001"`
 	HotelHost string `envconfig:"HOTEL_HOST" default:"bh_hotel"`
 	UserPort  string `envconfig:"USER_PORT" default:"5002"`
 	UserHost  string `envconfig:"USER_HOST" default:"bh_user"`
