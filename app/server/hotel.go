@@ -35,7 +35,7 @@ func (b *BookHotelServiceServerImpl) BookHotel(ctx context.Context, req *gpb.Boo
 	})
 	if err != nil {
 		log.Printf("ReserveHotel failed:%v\n", err)
-		if _, err := userClient.DecrUserCounter(ctx, &upb.DecrUserCounterMessage{UserId: req.UserId}); err != nil {
+		if _, err := userClient.DecrUserCounter(spanCtx, &upb.DecrUserCounterMessage{UserId: req.UserId}); err != nil {
 			// ここで失敗するとデータ整合性が保てないので、リトライやエラー通知の機構が必要
 			log.Printf("Compensating Transaction: DecrUserCounter failed:%v\n", err)
 		}
