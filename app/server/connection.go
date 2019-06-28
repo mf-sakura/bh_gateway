@@ -13,8 +13,8 @@ var userClient upb.UserServiceClient
 var hotelClient hpb.HotelServiceClient
 
 func CreateConnections(conf *config.GRPCConfig) error {
-	userTarget := fmt.Sprintf("%s:%s", conf.UserHost, conf.UserPort)
-	hotelTarget := fmt.Sprintf("%s:%s", conf.HotelHost, conf.HotelPort)
+	userTarget := fmt.Sprintf("%s:%d", conf.UserHost, conf.UserPort)
+	hotelTarget := fmt.Sprintf("%s:%d", conf.HotelHost, conf.HotelPort)
 	uconn, err := grpc.Dial(userTarget, grpc.WithInsecure())
 	if err != nil {
 		return err
