@@ -39,7 +39,7 @@ func (b *BookHotelServiceServerImpl) BookHotel(ctx context.Context, req *gpb.Boo
 	// }
 	// return &gpb.BookHotelResponse{ReservtionId: res.ReservationId}, nil
 	bs := NewBookStateMachine(req.UserId, req.PlanId)
-	bs.FSM.Event("incr")
+	bs.FSM.Event("incr", ctx)
 	if bs.Err != nil {
 		return nil, grpc.Errorf(codes.Internal, "予約に失敗しました")
 	}
@@ -89,7 +89,7 @@ func (b *BookHotelMachine) Increment() func(*fsm.Event) {
 		}); err != nil {
 			// b.ErrChan <- err
 			b.Err = err
-			b.FSM.Event("incr_err", ctx, err)
+			b.FSM.Event("incr_err", ctx)
 		}
 		b.FSM.Event("reserve", ctx)
 	}
