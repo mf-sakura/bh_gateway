@@ -24,7 +24,9 @@ func (b *BookHotelServiceServerImpl) BookHotel(ctx context.Context, req *gpb.Boo
 		return nil, grpc.Errorf(codes.Internal, "予約に失敗しました")
 	}
 	res, err := hotelClient.ReserveHotel(ctx, &hpb.ReserveHotellMessage{
-		PlanId: req.PlanId,
+		PlanId:     req.PlanId,
+		UserId:     req.UserId,
+		SequenceId: req.SequenceId,
 	})
 	if err != nil {
 		log.Printf("ReserveHotel failed:%v\n", err)
