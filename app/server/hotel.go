@@ -72,9 +72,9 @@ func NewBookStateMachine(userID, planID int64) *BookHotelMachine {
 			{Name: "rollbackend", Src: []string{"incr_rollback"}, Dst: "end"},
 		},
 		fsm.Callbacks{
-			"before_incr":        b.Increment(),
-			"before_reserve":     b.Reserve(),
-			"before_reserve_err": b.RollBackIncrement(),
+			"after_incr":        b.Increment(),
+			"after_reserve":     b.Reserve(),
+			"after_reserve_err": b.RollBackIncrement(),
 		},
 	)
 	return b
